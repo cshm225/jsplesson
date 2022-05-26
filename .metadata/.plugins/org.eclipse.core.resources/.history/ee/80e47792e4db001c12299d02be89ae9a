@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quiz</title>
+<link rel="stylesheet" href="/quiz/css/main.css">
+</head>
+<body>
+<div id="container">
+	<div id="boxA">
+		<p>スカイツリーの高さは何m?</p>
+		<form action="/quiz/result" method="post" >
+		<input type="text" name="ans"><br>
+		<input type="submit" value="送信"> 
+</form>
+	</div>
+	<div id="boxB">
+		<img src="quiz/images/smile.png">
+		</div>
+</div>
+</body>
+</html>

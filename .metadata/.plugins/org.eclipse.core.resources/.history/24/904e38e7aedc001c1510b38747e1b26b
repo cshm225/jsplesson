@@ -1,0 +1,18 @@
+package servlet;
+
+import model.Health;
+
+public class HealthCheckLogic {
+	Health h;
+	double height;
+	double weight;
+	double bmi;
+	HealthCheckLogic(Health h){
+		this.h=h;
+		this.height=h.getHeight();
+		this.weight=h.getWeight();
+	}
+	public void calcbmi(){
+		bmi=weight/((height*0.01)*(height*0.01));
+	}
+}

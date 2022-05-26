@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>kenkousindan</title>
+</head>
+<body>
+<form action="Health" method="post">
+身長:<input type="number" name="height">(cm)<br>
+体重:<input type="number" name="weight">(kg)<br>
+<input type="submit" name="送信">
+</form>
+</body>
+</html>

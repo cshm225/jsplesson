@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@page import="servlet.*" %>
+    <%
+    	HealthCheckLogic hcl=(HealthCheckLogic)request.getAttribute("bmi");
+
+    %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>kekka-</title>
+</head>
+<body>
+<h1>kekka</h1>
+身長:<%hcl.getHeight(); %>cm
+体重:<%hcl.getWeight(); %>cm
+bmi:<%hcl.calcbmi(); %>cm
+</body>
+</html>
