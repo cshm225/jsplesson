@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <libraryInfos>
     <libraryInfo home="C:\Users\0314AM\pleiades-2020-12-java-win-64bit-jre_20201222\pleiades\java\11" version="11.0.9"/>
+    <libraryInfo home="D:\ajapower\pleiades-2020-12-java-win-64bit-jre_20201222\pleiades\eclipse\jre" version="11.0.9"/>
     <libraryInfo home="C:\Users\0314AM\pleiades-2020-12-java-win-64bit-jre_20201222\pleiades\java\6" version="1.6.0_45">
         <bootpath>
             <entry path="C:\Users\0314AM\pleiades-2020-12-java-win-64bit-jre_20201222\pleiades\java\6\jre\lib\resources.jar"/>
@@ -59,4 +60,5 @@
             <entry path="C:\Users\0314AM\pleiades-2020-12-java-win-64bit-jre_20201222\pleiades\java\8\jre\lib\endorsed"/>
         </endorsedDirs>
     </libraryInfo>
+    <libraryInfo home="D:\ajapower\pleiades-2020-12-java-win-64bit-jre_20201222\pleiades\eclipse" version="11.0.9"/>
 </libraryInfos>

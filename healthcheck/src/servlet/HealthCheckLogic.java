@@ -12,6 +12,17 @@ public class HealthCheckLogic {
 		this.height=h.getHeight();
 		this.weight=h.getWeight();
 	}
+	public String type() {
+		String usertype;
+		if(calcbmi()<18.6) {
+			usertype="やせ";
+		}else if(calcbmi()<26) {
+			usertype="普通";
+		}else {
+			usertype="肥満";
+		}
+		return usertype;
+	}
 	public double calcbmi(){
 		bmi=weight/((height*0.01)*(height*0.01));
 		return bmi;
