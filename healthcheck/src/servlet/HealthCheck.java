@@ -29,13 +29,13 @@ public class HealthCheck extends HttpServlet {
 		String weight=request.getParameter("weight");
 		double height1=Double.parseDouble(height);
 		double weight1=Double.parseDouble(weight);
-		
+
 		Health h=new Health(height1,weight1);
 		//bmikeisan
 		HealthCheckLogic hcl=new HealthCheckLogic(h);
 
 		//kekkadaasu
-		request.setAttribute("bmi",h);
+		request.setAttribute("bmi",hcl);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/lib/healthcheckresult.jsp");
 		rd.forward(request,response);
 
