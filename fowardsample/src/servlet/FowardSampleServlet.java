@@ -1,5 +1,6 @@
 package servlet;
-
+//bbbb
+//test
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/FowardSampleServlet")
 public class FowardSampleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
