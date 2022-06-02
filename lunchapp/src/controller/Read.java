@@ -23,6 +23,7 @@ public class Read extends HttpServlet {
 		request.setAttribute("list", list);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/read.jsp");
 		rd.forward(request, response);
+
 	}
 
 }
