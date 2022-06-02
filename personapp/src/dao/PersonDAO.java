@@ -80,4 +80,47 @@ public class PersonDAO {
 			this.disconnect();
 		}
 	}
+	public Person findOne(int id) {
+		Person person=null;
+		try {
+			this.connect();
+			ps=db.prepareStatement("select * from persons where id=?");
+			ps.setInt(1,id);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				String name=rs.getString("name");
+				int age=rs.getInt("age");
+				person=new Person(id,name,age);
+			}
+		} catch (NamingException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			this.disconnect();
+		}
+		return person;
+	}
+	public void update(Person person) {
+		try {
+			this.connect();
+			ps=db.prepareStatement("update persons set name=?,age=? where id=?");
+			ps.setString(1, person.getName());
+			ps.setInt(2, person.getAge());
+			ps.setInt(3, person.getId());
+			ps.executeUpdate();
+
+
+		} catch (NamingException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			this.disconnect();
+		}
+	}
 }
