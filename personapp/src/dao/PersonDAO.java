@@ -62,4 +62,22 @@ public class PersonDAO {
 		}
 		return list;
 	}
+	public void insertOne(Person person) {
+		try {
+			this.connect();
+			ps=db.prepareStatement("insert into persons(name,age) value(?,?)");
+			ps.setString(1,person.getName());
+			ps.setInt(2,person.getAge());
+			ps.executeUpdate();
+
+		} catch (NamingException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			this.disconnect();
+		}
+	}
 }
