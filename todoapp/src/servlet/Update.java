@@ -29,8 +29,16 @@ public class Update extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/update.jsp");
-		rd.forward(request,response);
+		String s_id=request.getParameter("id");
+		if(s_id==null) {
+			response.sendRedirect("/todoapp/Read");
+		}else {
+			TodoDAO dao=new TodoDAO();
+			Todo todo=dao.findOne(Integer.parseInt(s_id));
+			request.setAttribute("todo", todo);
+			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/update.jsp");
+			rd.forward(request,response);
+		}
 
 	}
 
