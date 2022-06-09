@@ -147,7 +147,7 @@ public class WordDAO {
 		return list;
 	}
 
-	//一致件数を求めるメソッド
+	//一致件数を求めるメソッドia
 	public int getCount(String searchWord,String mode){
 		switch(mode) {
 		case "startsWith":
