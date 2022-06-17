@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="model.*,java.util.*"%>
-<%
-EJWord ejw=(EJWord)request.getAttribute("ejw");
-%>
+    pageEncoding="UTF-8" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,52 +12,55 @@ EJWord ejw=(EJWord)request.getAttribute("ejw");
 <body>
 <div class="container">
 <form action="/ejword/main" method="get" class="form-inline">
-<input type="text" name="searchWord" value="<%=ejw.getSearchWord()%>" class="form-control" placeholder="検索後を入力" required>
+<input type="text" name="searchWord" value="${ ejw.searchWord}" class="form-control" placeholder="検索後を入力" required>
 <select name="mode" class="form-control">
-<option value="startsWith" <%=ejw.getMode().equals("startsWith")? " selected":"" %>>で始まる</option>
-<option value="contains" <%=ejw.getMode().equals("contains")? " selected":"" %>>含む</option>
-<option value="endsWith" <%=ejw.getMode().equals("endsWith")? " selected":"" %>>で終わる</option>
-<option value="match" <%=ejw.getMode().equals("match")? " selected":"" %>>一致する</option>
+<option value="startsWith" ${ejw.mode eq("startsWith")? " selected":"" }>で始まる</option>
+<option value="contains" ${ ejw.mode eq("contains")? " selected":"" }>含む</option>
+<option value="endsWith" ${ ejw.mode eq("endsWith")? " selected":"" }>で終わる</option>
+<option value="match" ${ejw.mode eq("match")? " selected":"" }>一致する</option>
 </select>
 <button type="submit" class="btn btn-primary">検索</button>
 </form>
-<%if(ejw.getList() != null && ejw.getList().size()==0){ %>
+<c:if test="${ empty ejw.list and empty ejw.searchWord}">
 <p>１件も一致しませんでした</p>
-<%} %>
-<% if( ejw.getList() !=null && ejw.getList().size() > 0){ %>
-	<% if(ejw.getTotal() <=ejw.getLimit()){ %>
-		<p>全<%=ejw.getTotal() %>件</p>
-	<%}else{ %>
-		<p>全<%=ejw.getTotal() %>件中
-		<%=(ejw.getPageNo()-1)*ejw.getLimit()+1 %>~
-		<%=ejw.getPageNo()*ejw.getLimit() > ejw.getTotal()? ejw.getTotal():ejw.getPageNo()*ejw.getLimit()  %>
+</c:if>
+<c:if test="${ not empty ejw.list}">
+	<c:choose>
+	<c:when test="${ejw.total <=ejw.limit }">
+		<p>全<c:out value="${ ejw.total} "/></p>
+	</c:when><c:otherwise>
+		<p>全<c:out value="${ ejw.total} "/>件中
+		<c:out value="${ (ejw.pageNo-1)*ejw.limit+1}"/>
+		<c:out value="${ ejw.pageNo*ejw.limit > ejw.total? ejw.total:ejw.pageNo*ejw.limit}"/>
 		件を表示</p>
+		</c:otherwise>
+	</c:choose>
 		<ul class="pager">
-		<%if(ejw.getPageNo()>1){ %>
-			<li><a href="/ejword/main?searchWord=<%=ejw.getSearchWord() %>&mode=<%=ejw.getMode() %>&page=<%=ejw.getPageNo()-1 %>">←前へ</a></li>
-		<%} %>
-		<%if(ejw.getPageNo()*ejw.getLimit() < ejw.getTotal()){ %>
-			<li><a href="/ejword/main?searchWord=<%=ejw.getSearchWord() %>&mode=<%=ejw.getMode() %>&page=<%=ejw.getPageNo()+1 %>">次へ→</a></li>
-		<%} %>
+		<c:if test="${ejw.pageNo>1 }">
+			<li><a href="/ejword/main?searchWord=${ ejw.searchWord}&mode=${ ejw.mode}&page=${ ejw.pageNo-1 }">←前へ</a></li>
+		</c:if>
+		<c:if test="${ejw.pageNo*ejw.limit<ejw.total}">
+			<li><a href="/ejword/main?searchWord=${ ejw.searchWord}&mode=${ ejw.mode}&page=${ ejw.pageNo+1 }">次へ→</a></li>
+		</c:if>
 		</ul>
-	<%} %>
+	</c:if>
 	<table class="table table-borderd table-striped">
-	<% for(Word w:ejw.getList()){ %>
-		<tr><th><%=w.getTitle() %></th><td><%=w.getBody() %></td></tr>
-	<%} %>
+<c:forEach var="w" items="${ejw.list }">
+		<tr><th>${ w.title}</th><td>${ w.body}</td></tr>
+	</c:forEach>
 	</table>
-<%} %>
-<% if (ejw.getPager() !=null){ %>
+
+<c:if test="${not empty ejw.pager }">
 <div class='paginationBox'>
 	<ul class='pagination'>
-	<% for(String[] row:ejw.getPager()){ %>
-		<li class="<%=row[0]%>">
-		<a href="/ejword/main?searchWord=<%=ejw.getSearchWord() %>&mode=<%=ejw.getMode() %>&page=<%=row[1] %>"><%=row[2] %></a>
+	<c:forEach var="row" items="${ejw.pager }">
+		<li class="${row[0]}">
+		<a href="/ejword/main?searchWord=${ejw.searchWord}&mode=${ ejw.mode}&page=${row[1]}">${row[2]}</a>
 		</li>
-	<%} %>
+		</c:forEach>
 	</ul>
 </div>
-<%} %>
+</c:if>
 </div>
 <footer>
 © 2021 Joytas.net
